@@ -1,0 +1,34 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "pawsitively-purrfect.fullname" . }}
+  labels:
+    {{- include "pawsitively-purrfect.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: {{ .Values.service.port }}
+      targetPort: http
+      protocol: TCP
+      name: http
+  selector:
+    {{- include "pawsitively-purrfect.selectorLabels" . | nindent 4 }}
+
+---
+
+{{ $ := merge (deepCopy .) (dict "suffix" "-arangodb") }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "pawsitively-purrfect.fullname" . }}-arangodb
+  labels:
+    {{- include "pawsitively-purrfect.labels" $ | nindent 4 }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: {{ .Values.arangodb.port }}
+      targetPort: http
+      protocol: TCP
+      name: http
+  selector:
+    {{- include "pawsitively-purrfect.selectorLabels" $ | nindent 4 }}
