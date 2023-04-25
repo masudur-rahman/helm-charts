@@ -19,6 +19,7 @@ postgres:
   password: postgres
   database: pawsitive
   sslmode: disable
+  port: 5432
 
 grpc:
   enabled: false
@@ -27,6 +28,9 @@ grpc:
 imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
+
+pvc:
+  storageClassName: standard
 
 serviceAccount:
   # Specifies whether a service account should be created

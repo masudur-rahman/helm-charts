@@ -1,9 +1,9 @@
-{{ if not .Values.grpc.enabled }}
-{{ $ := merge (deepCopy .) (dict "suffix" "-arangodb") }}
+{{ if .Values.grpc.enabled }}
+{{ $ := merge (deepCopy .) (dict "suffix" "-postgres") }}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "pawsitively-purrfect.fullname" . }}-arangodb
+  name: {{ include "pawsitively-purrfect.fullname" . }}-postgres
   labels:
     {{- include "pawsitively-purrfect.labels" $ | nindent 4 }}
 spec:
@@ -31,33 +31,31 @@ spec:
         - name: {{ .Chart.Name }}
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
-          image: "{{ .Values.arangodb.image }}"
+          image: "{{ .Values.postgres.image }}"
           env:
-            - name: ARANGO_ROOT_PASSWORD
-              value: {{ .Values.arangodb.password }}
+            - name: POSTGRES_USER
+              value: {{ .Values.postgres.user }}
+            - name: POSTGRES_PASSWORD
+              value: {{ .Values.postgres.password }}
+            - name: POSTGRES_DB
+              value: {{ .Values.postgres.database }}
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - name: http
-              containerPort: {{ .Values.arangodb.port }}
+              containerPort: {{ .Values.postgres.port }}
               protocol: TCP
           livenessProbe:
-            httpGet:
-              path: /_admin/server/availability
-              port: {{ .Values.arangodb.port }}
-              httpHeaders:
-              - name: Authorization
-                value: Basic {{ printf "root:%s" .Values.arangodb.password | b64enc }}
+            exec:                # which confirms the database is running
+              command: 
+                - pg_isready
           readinessProbe:
-            httpGet:
-              path: /_admin/server/availability
-              port: {{ .Values.arangodb.port }}
-              httpHeaders:
-              - name: Authorization
-                value: Basic {{ printf "root:%s" .Values.arangodb.password | b64enc }}
+            exec:                # which confirms the database is running
+              command: 
+               - pg_isready
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           volumeMounts:
-            - mountPath: /var/lib/arangodb3
+            - mountPath: /var/lib/postgresql/data
               name: storage
       {{- with .Values.nodeSelector }}
       nodeSelector:
@@ -74,12 +72,12 @@ spec:
       volumes:
         - name: storage
           persistentVolumeClaim:
-            claimName: {{ include "pawsitively-purrfect.fullname" . }}-arangodb
+            claimName: {{ include "pawsitively-purrfect.fullname" . }}-postgres
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: {{ include "pawsitively-purrfect.fullname" . }}-arangodb
+  name: {{ include "pawsitively-purrfect.fullname" . }}-postgres
   namespace: {{ .Release.Namespace }}
 spec:
   volumeMode: Filesystem
@@ -88,19 +86,19 @@ spec:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 1Gi
+      storage: 3Gi
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ include "pawsitively-purrfect.fullname" . }}-arangodb
+  name: {{ include "pawsitively-purrfect.fullname" . }}-postgres
   labels:
     {{- include "pawsitively-purrfect.labels" $ | nindent 4 }}
 spec:
   type: {{ .Values.service.type }}
   ports:
-    - port: {{ .Values.arangodb.port }}
-      targetPort: {{ .Values.arangodb.port }}
+    - port: {{ .Values.postgres.port }}
+      targetPort: {{ .Values.postgres.port }}
       protocol: TCP
       name: http
   selector:
