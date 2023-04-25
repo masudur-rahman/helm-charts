@@ -1,0 +1,90 @@
+{{ if .Values.grpc.enabled }}
+{{ $ := merge (deepCopy .) (dict "suffix" "-grpc") }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "pawsitively-purrfect.fullname" . }}-grpc
+  labels:
+    {{- include "pawsitively-purrfect.labels" . | nindent 4 }}
+spec:
+  {{- if not .Values.autoscaling.enabled }}
+  replicas: {{ .Values.replicaCount }}
+  {{- end }}
+  selector:
+    matchLabels:
+      {{- include "pawsitively-purrfect.selectorLabels" $ | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "pawsitively-purrfect.selectorLabels" $ | nindent 8 }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "pawsitively-purrfect.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      containers:
+        - name: {{ .Chart.Name }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.image.registry }}/{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          args:
+            - grpc-serve
+            - --config=/etc/pawsitively-purrfect/configs/.pawsitively-purrfect.yaml
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: {{ .Values.grpc.port }}
+              protocol: TCP
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+          volumeMounts:
+            - mountPath: /etc/pawsitively-purrfect/configs
+              name: config
+          livenessProbe:
+            grpc:
+              port: {{ .Values.grpc.port }}
+            initialDelaySeconds: 20
+          readinessProbe:
+            grpc:
+              port: {{ .Values.grpc.port }}
+            initialDelaySeconds: 15
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      volumes:
+        - name: config
+          secret:
+            secretName: {{ include "pawsitively-purrfect.fullname" . }}-config
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "pawsitively-purrfect.fullname" . }}-grpc
+  labels:
+    {{- include "pawsitively-purrfect.labels" $ | nindent 4 }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: {{ .Values.grpc.port }}
+      targetPort: {{ .Values.grpc.port }}
+      protocol: TCP
+      name: http
+  selector:
+    {{- include "pawsitively-purrfect.selectorLabels" $ | nindent 4 }}
+{{ end }}

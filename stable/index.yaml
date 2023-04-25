@@ -1,14 +1,25 @@
 apiVersion: v1
 entries:
+  pawsitively-purrfect:
+  - apiVersion: v2
+    appVersion: v0.0.3
+    created: "2023-04-26T04:14:09.167592+06:00"
+    description: A Helm chart for Kubernetes
+    digest: a77af89f4724028bf373a5fa396e8d07207761b8f13fae45209c19b6366b55cf
+    name: pawsitively-purrfect
+    type: application
+    urls:
+    - https://masudur-rahman.github.io/helm-charts/stable/pawsitively-purrfect/pawsitively-purrfect-0.0.3.tgz
+    version: 0.0.3
   sample-chart:
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2023-04-23T13:59:21.594825+06:00"
+    created: "2023-04-26T04:14:09.167916+06:00"
     description: A Helm chart for Kubernetes
-    digest: 226028cc3b611866cb621bf67aa01de2fb6f5566865c2bad81f53ea5688ee6f2
+    digest: fee43c43304f96e522fb4b2641afa878420409de3f1f122364b59f672fb4d89e
     name: sample-chart
     type: application
     urls:
     - https://masudur-rahman.github.io/helm-charts/stable/sample-chart/sample-chart-0.1.0.tgz
     version: 0.1.0
-generated: "2023-04-23T13:59:21.594495+06:00"
+generated: "2023-04-26T04:14:09.16647+06:00"

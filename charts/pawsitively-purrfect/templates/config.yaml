@@ -1,0 +1,43 @@
+{{ $ := merge (deepCopy .) (dict "suffix" "-arangodb") }}
+apiVersion: v1
+kind: Secret
+metadata:
+  name: {{ include "pawsitively-purrfect.fullname" . }}-config
+  labels:
+    {{- include "pawsitively-purrfect.labels" $ | nindent 4 }}
+stringData:
+  .pawsitively-purrfect.yaml: |
+    server:
+        host: 0.0.0.0
+        port: {{ .Values.service.port }}
+        domain: {{ .Values.domain }}
+
+    grpc:
+        serverHost: 0.0.0.0
+        clientHost: {{ template "grpc.host" . }}
+        port: {{ .Values.grpc.port }}
+
+    database:
+        type: {{ template "database.type" . }}
+        postgres:
+            host: {{ template "postgres.host" . }}
+            port: {{ .Values.postgres.port }}
+            user: {{ .Values.postgres.user }}
+            password: {{ .Values.postgres.password }}
+            name: {{ .Values.postgres.database }}
+            sslmode: {{ .Values.postgres.sslmode | default "disable" }}
+        arangodb:
+            host: {{ template "arangodb.host" . }}
+            port: {{ .Values.arangodb.port }}
+            user: "root"
+            password: {{ .Values.arangodb.password }}
+            name: "_system"
+
+    session:
+        name: pawsitively_purrfect
+        httpOnly: true
+        csrfSecret: zjj0edXEmR1ntL22AizBDtejhNFP16u9Zl5MZZGmEwI=
+        csrfHeader: "X-CSRF-Token"
+        csrfForm: "_csrf"
+        sessionKey: "userID"
+
