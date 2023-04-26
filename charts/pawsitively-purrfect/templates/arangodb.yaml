@@ -46,14 +46,14 @@ spec:
               port: {{ .Values.arangodb.port }}
               httpHeaders:
               - name: Authorization
-                value: Basic {{ printf "root:%s" .Values.arangodb.password | b64enc }}
+                value: Basic {{ printf "%s:%s" root .Values.arangodb.password | b64enc }}
           readinessProbe:
             httpGet:
               path: /_admin/server/availability
               port: {{ .Values.arangodb.port }}
               httpHeaders:
               - name: Authorization
-                value: Basic {{ printf "root:%s" .Values.arangodb.password | b64enc }}
+                value: Basic {{ printf "%s:%s" root .Values.arangodb.password | b64enc }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           volumeMounts:
