@@ -1,4 +1,5 @@
 replicaCount: 1
+# Domain to serve the Pawsitively Purrfect Server
 domain: pawsitively.purrfect
 
 image:
@@ -8,8 +9,17 @@ image:
   # Overrides the image tag whose default is the chart appVersion.
   tag: ""
 
+grpc:
+  enabled: false
+  port: 8080
+
+service:
+  type: ClusterIP
+  port: 62783
+
 arangodb:
   image: arangodb:3.10
+  user: root
   password: admin
   port: 8529
 
@@ -20,10 +30,6 @@ postgres:
   database: pawsitive
   sslmode: disable
   port: 5432
-
-grpc:
-  enabled: false
-  port: 8080
 
 imagePullSecrets: []
 nameOverride: ""
@@ -53,10 +59,6 @@ securityContext: {}
   # readOnlyRootFilesystem: true
   # runAsNonRoot: true
   # runAsUser: 1000
-
-service:
-  type: ClusterIP
-  port: 62783
 
 ingress:
   enabled: false
