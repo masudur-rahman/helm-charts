@@ -1,0 +1,106 @@
+{{ if .Values.database.deploy }}
+{{ $ := merge (deepCopy .) (dict "suffix" "-postgres") }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "expense-tracker-bot.fullname" . }}-postgres
+  labels:
+    {{- include "expense-tracker-bot.labels" $ | nindent 4 }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      {{- include "expense-tracker-bot.selectorLabels" $ | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "expense-tracker-bot.selectorLabels" $ | nindent 8 }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "expense-tracker-bot.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      containers:
+        - name: {{ .Chart.Name }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.database.postgres.image }}"
+          env:
+            - name: POSTGRES_USER
+              value: {{ .Values.database.postgres.user }}
+            - name: POSTGRES_PASSWORD
+              value: {{ .Values.database.postgres.password }}
+            - name: POSTGRES_DB
+              value: {{ .Values.database.postgres.database }}
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: {{ .Values.database.postgres.port }}
+              protocol: TCP
+          livenessProbe:
+            exec:                # which confirms the database is running
+              command: 
+                - pg_isready
+          readinessProbe:
+            exec:                # which confirms the database is running
+              command: 
+               - pg_isready
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+          volumeMounts:
+            - mountPath: /var/lib/postgresql/data
+              name: storage
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      volumes:
+        - name: storage
+          persistentVolumeClaim:
+            claimName: {{ include "expense-tracker-bot.fullname" . }}-postgres
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ include "expense-tracker-bot.fullname" . }}-postgres
+  namespace: {{ .Release.Namespace }}
+spec:
+  volumeMode: Filesystem
+  storageClassName: {{ .Values.pvc.storageClassName }}
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 3Gi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "expense-tracker-bot.fullname" . }}-postgres
+  labels:
+    {{- include "expense-tracker-bot.labels" $ | nindent 4 }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: {{ .Values.database.postgres.port }}
+      targetPort: {{ .Values.database.postgres.port }}
+      protocol: TCP
+      name: http
+  selector:
+    {{- include "expense-tracker-bot.selectorLabels" $ | nindent 4 }}
+{{ end }}

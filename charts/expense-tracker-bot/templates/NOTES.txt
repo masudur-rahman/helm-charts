@@ -1,0 +1,4 @@
+Check the deployed Pods by running the following command:
+
+kubectl get pods -n demo -l "app.kubernetes.io/instance={{ .Release.Name }}"
+
