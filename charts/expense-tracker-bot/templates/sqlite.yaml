@@ -1,0 +1,17 @@
+{{ if eq .Values.database.type "sqlite" }}
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ include "expense-tracker-bot.fullname" . }}-sqlite
+  namespace: {{ .Release.Namespace }}
+spec:
+  volumeMode: Filesystem
+  {{- if .Values.pvc.storageClassName }}
+  storageClassName: {{ .Values.pvc.storageClassName }}
+  {{- end }}
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 3Gi
+{{- end }}

@@ -63,8 +63,8 @@ Create the name of the service account to use
 {{- end }}
 {{- end }}
 
-{{- define "expense-tracker-bot.dbhost" -}}
-{{- if .Values.database.deploy }}
+{{- define "expense-tracker-bot.postgres-host" -}}
+{{- if .Values.database.postgres.deploy }}
 {{- include "expense-tracker-bot.fullname" . }}-postgres.{{ .Release.Namespace }}.svc
 {{- else }}
 {{- .Values.database.postgres.host }}

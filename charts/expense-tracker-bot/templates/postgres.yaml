@@ -81,7 +81,9 @@ metadata:
   namespace: {{ .Release.Namespace }}
 spec:
   volumeMode: Filesystem
+  {{- if .Values.pvc.storageClassName }}
   storageClassName: {{ .Values.pvc.storageClassName }}
+  {{- end }}
   accessModes:
     - ReadWriteOnce
   resources:

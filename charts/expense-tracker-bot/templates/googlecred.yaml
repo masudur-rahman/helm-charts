@@ -1,0 +1,11 @@
+{{ if  and .Values.googleCredsJson (eq .Values.database.type "sqlite") }}
+apiVersion: v1
+kind: Secret
+metadata:
+  name: {{ include "expense-tracker-bot.fullname" . }}-google-cred
+  labels:
+    {{- include "expense-tracker-bot.labels" . | nindent 4 }}
+stringData:
+  application_default_credentials.json: |
+    {{ .Values.googleCredsJson }}
+{{ end -}}

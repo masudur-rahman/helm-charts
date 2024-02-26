@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: {{ include "expense-tracker-bot.fullname" . }}-config
+  labels:
+    {{- include "expense-tracker-bot.labels" . | nindent 4 }}
+stringData:
+  .expense-tracker.yaml: |
+    database:
+        type: {{ .Values.database.type }}
+        postgres:
+            host: {{ template "expense-tracker-bot.postgres-host" . }}
+            port: {{ .Values.database.postgres.port }}
+            user: {{ .Values.database.postgres.user }}
+            password: {{ .Values.database.postgres.password }}
+            name: {{ .Values.database.postgres.database }}
+            sslmode: {{ .Values.database.postgres.sslmode | default "disable" }}
+        sqlite:
+          syncToDrive: {{ .Values.database.sqlite.syncToDrive }}
+          disableSyncFromDrive: {{ .Values.database.sqlite.disableSyncFromDrive }}
+          syncInterval: {{ .Values.database.sqlite.syncInterval }}

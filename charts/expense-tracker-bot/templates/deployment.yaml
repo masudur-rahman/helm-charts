@@ -35,20 +35,9 @@ spec:
           env:
             - name: TELEGRAM_BOT_TOKEN
               value: {{ .Values.telegram.token }}
-            - name: POSTGRES_USER
-              value: {{ .Values.database.postgres.user }}
-            - name: POSTGRES_PASSWORD
-              value: {{ .Values.database.postgres.password }}
-            - name: POSTGRES_DB
-              value: {{ .Values.database.postgres.database }}
-            - name: POSTGRES_HOST
-              value: {{ include "expense-tracker-bot.dbhost" . }}
-            - name: POSTGRES_PORT
-              value: {{ quote .Values.database.postgres.port }}
-            - name: POSTGRES_SSL_MODE
-              value: {{ .Values.database.postgres.sslmode }}
           args:
             - serve
+            - --config=/etc/expense-tracker/configs/.expense-tracker.yaml
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - name: http
@@ -64,6 +53,13 @@ spec:
               port: http
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
+          volumeMounts:
+            - mountPath: /etc/expense-tracker/configs
+              name: config
+            {{- if eq .Values.database.type "sqlite" }}
+            - mountPath: /.expense-tracker
+              name: sqlite
+            {{- end }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
@@ -76,3 +72,12 @@ spec:
       tolerations:
         {{- toYaml . | nindent 8 }}
       {{- end }}
+      volumes:
+        - name: config
+          secret:
+            secretName: {{ include "expense-tracker-bot.fullname" . }}-config
+        {{- if eq .Values.database.type "sqlite" }}
+        - name: sqlite
+          persistentVolumeClaim:
+            claimName: {{ include "expense-tracker-bot.fullname" . }}-sqlite
+        {{- end }}
