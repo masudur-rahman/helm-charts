@@ -12,8 +12,8 @@ helm search repo masud/expense-tracker-bot
 ```bash
 helm upgrade --install expense-tracker-bot masud/expense-tracker-bot -n demo \
     --create-namespace \
-    --set telegram.token=<TELEGRAM_BOT_TOKEN> \
-    --set database.deploy=true # set to false if you want to use external database
+    --set telegram.token=<TELEGRAM_BOT_TOKEN> 
+    # --set database.deploy=true # set to false if you want to use external database
     # --set database.postgres.user=<POSTGRES_USER> \
     # --set database.postgres.password=<POSTGRES_PASSWORD> \
     # --set database.postgres.db=<POSTGRES_DB> \

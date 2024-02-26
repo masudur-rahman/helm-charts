@@ -10,9 +10,16 @@ image:
 telegram:
   token:
 
+googleCredsJson:
+
 database:
-  deploy: false
+  type: sqlite
+  sqlite:
+    syncToDrive: false
+    disableSyncFromDrive: false
+    syncInterval: 2h
   postgres:
+    deploy: false
     image: postgres:15.2-alpine # used only if deploy=true
     user: postgres
     password: postgres
@@ -21,7 +28,7 @@ database:
     host: localhost # <postgres-service-name>.<ns>.svc # when deploy=true
     port: 5432
 pvc:
-  storageClassName: standard
+  storageClassName:
 
 
 imagePullSecrets: []
