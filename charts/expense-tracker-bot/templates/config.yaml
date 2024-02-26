@@ -6,6 +6,8 @@ metadata:
     {{- include "expense-tracker-bot.labels" . | nindent 4 }}
 stringData:
   .expense-tracker.yaml: |
+    telegram:
+      user: {{ .Values.telegram.user }}
     database:
         type: {{ .Values.database.type }}
         postgres:

@@ -2,10 +2,10 @@ apiVersion: v1
 entries:
   expense-tracker-bot:
   - apiVersion: v2
-    appVersion: v0.2.3
-    created: "2024-02-26T15:41:22.188835+06:00"
+    appVersion: v0.2.4
+    created: "2024-02-26T21:49:13.169044+06:00"
     description: A Telegram Bot to track your expenses.
-    digest: 584c38746a4930a3eab050a1593d6fb6d69d78b8465d1669ec4f28c90e2a244d
+    digest: 87c544d39e626b45ff5381a6571135ed9fd189094c815efd2e6cb157aee89b42
     name: expense-tracker-bot
     type: application
     urls:
@@ -13,7 +13,7 @@ entries:
     version: 0.2.0
   - apiVersion: v2
     appVersion: v0.1.0
-    created: "2024-02-26T15:41:22.188581+06:00"
+    created: "2024-02-26T21:49:13.168797+06:00"
     description: A Helm chart for Kubernetes
     digest: 2504b17c9e67d34eeeb3ad6df56287763068299f3070fe5b6244a346640d41c0
     name: expense-tracker-bot
@@ -24,9 +24,9 @@ entries:
   pawsitively-purrfect:
   - apiVersion: v2
     appVersion: v0.1.0
-    created: "2024-02-26T15:41:22.189528+06:00"
+    created: "2024-02-26T21:49:13.1697+06:00"
     description: Pawsitively Purrfect
-    digest: 8f6755c544dcb55c013c75fff58359768bc669ec394ef8c8ca25dafc747e4644
+    digest: dbdb3dd93cb0cbd31b05389f2b9e02dad68eb37e1b9fbfd9647a8dd3b556591c
     name: pawsitively-purrfect
     type: application
     urls:
@@ -34,7 +34,7 @@ entries:
     version: 0.1.0
   - apiVersion: v2
     appVersion: v0.0.3
-    created: "2024-02-26T15:41:22.189297+06:00"
+    created: "2024-02-26T21:49:13.16944+06:00"
     description: A Helm chart for Kubernetes
     digest: 528a028a6e15f75c719a013ec835f471e48c3da1610a6a5b20cf18858da2a6ba
     name: pawsitively-purrfect
@@ -45,12 +45,12 @@ entries:
   sample-chart:
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2024-02-26T15:41:22.189713+06:00"
+    created: "2024-02-26T21:49:13.169884+06:00"
     description: A Helm chart for Kubernetes
-    digest: 8d36ff7137baa66faccfbbb62a8cea94022323674510941ca3ed9f79098189d9
+    digest: 7625c0617663f9c94d4e6c9dce87ae3736a9e62f65ca61247777e5a75809f42c
     name: sample-chart
     type: application
     urls:
     - https://masudur-rahman.github.io/helm-charts/stable/sample-chart/sample-chart-0.1.0.tgz
     version: 0.1.0
-generated: "2024-02-26T15:41:22.187986+06:00"
+generated: "2024-02-26T21:49:13.167665+06:00"
