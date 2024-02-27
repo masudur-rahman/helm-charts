@@ -2,8 +2,18 @@ apiVersion: v1
 entries:
   expense-tracker-bot:
   - apiVersion: v2
+    appVersion: v1.0.0
+    created: "2024-02-27T23:29:12.885684+06:00"
+    description: A Telegram Bot to track your expenses.
+    digest: 938ff8a9520618d99ed1f5dd74e816253844c492f71ef5b76d83b25ad1fa3a93
+    name: expense-tracker-bot
+    type: application
+    urls:
+    - https://masudur-rahman.github.io/helm-charts/stable/expense-tracker-bot/expense-tracker-bot-1.0.0.tgz
+    version: 1.0.0
+  - apiVersion: v2
     appVersion: v0.2.4
-    created: "2024-02-26T21:49:13.169044+06:00"
+    created: "2024-02-27T23:29:12.885414+06:00"
     description: A Telegram Bot to track your expenses.
     digest: 87c544d39e626b45ff5381a6571135ed9fd189094c815efd2e6cb157aee89b42
     name: expense-tracker-bot
@@ -13,7 +23,7 @@ entries:
     version: 0.2.0
   - apiVersion: v2
     appVersion: v0.1.0
-    created: "2024-02-26T21:49:13.168797+06:00"
+    created: "2024-02-27T23:29:12.884653+06:00"
     description: A Helm chart for Kubernetes
     digest: 2504b17c9e67d34eeeb3ad6df56287763068299f3070fe5b6244a346640d41c0
     name: expense-tracker-bot
@@ -24,9 +34,9 @@ entries:
   pawsitively-purrfect:
   - apiVersion: v2
     appVersion: v0.1.0
-    created: "2024-02-26T21:49:13.1697+06:00"
+    created: "2024-02-27T23:29:12.886342+06:00"
     description: Pawsitively Purrfect
-    digest: dbdb3dd93cb0cbd31b05389f2b9e02dad68eb37e1b9fbfd9647a8dd3b556591c
+    digest: 05363996b314e9acd7737d4ac4425fdd13c0b45a714b9a447fd1f5af1609bd64
     name: pawsitively-purrfect
     type: application
     urls:
@@ -34,7 +44,7 @@ entries:
     version: 0.1.0
   - apiVersion: v2
     appVersion: v0.0.3
-    created: "2024-02-26T21:49:13.16944+06:00"
+    created: "2024-02-27T23:29:12.886046+06:00"
     description: A Helm chart for Kubernetes
     digest: 528a028a6e15f75c719a013ec835f471e48c3da1610a6a5b20cf18858da2a6ba
     name: pawsitively-purrfect
@@ -45,12 +55,12 @@ entries:
   sample-chart:
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2024-02-26T21:49:13.169884+06:00"
+    created: "2024-02-27T23:29:12.886546+06:00"
     description: A Helm chart for Kubernetes
-    digest: 7625c0617663f9c94d4e6c9dce87ae3736a9e62f65ca61247777e5a75809f42c
+    digest: 3919b62611054613e543d39fe6748de7c80d94a0f94ef05d6f10506a4d42aa71
     name: sample-chart
     type: application
     urls:
     - https://masudur-rahman.github.io/helm-charts/stable/sample-chart/sample-chart-0.1.0.tgz
     version: 0.1.0
-generated: "2024-02-26T21:49:13.167665+06:00"
+generated: "2024-02-27T23:29:12.883721+06:00"
