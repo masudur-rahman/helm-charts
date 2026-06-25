@@ -1,1 +1,14 @@
 .idea
+
+# Plaintext / decrypted secrets — NEVER commit. Only *.sops.yaml (encrypted) is tracked.
+porkbun-credentials.yaml
+porkbun-credentials.yml
+*.dec.yaml
+*.dec.yml
+secret.yaml
+secret.yml
+
+# age private keys
+*.agekey
+age.key
+key.txt

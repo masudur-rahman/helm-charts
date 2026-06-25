@@ -1,0 +1,24 @@
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: letsencrypt-porkbun
+spec:
+  acme:
+    server: https://acme-v02.api.letsencrypt.org/directory
+    email: masudjuly02@gmail.com
+    privateKeySecretRef:
+      name: letsencrypt-porkbun-account
+    solvers:
+      # DNS-01 via the Porkbun cert-manager webhook (installed by Ansible).
+      # groupName/solverName must match the deployed webhook chart.
+      - dns01:
+          webhook:
+            groupName: acme.porkbun.com
+            solverName: porkbun
+            config:
+              apiKeySecretRef:
+                name: porkbun-credentials
+                key: api-key
+              secretApiKeySecretRef:
+                name: porkbun-credentials
+                key: secret-key

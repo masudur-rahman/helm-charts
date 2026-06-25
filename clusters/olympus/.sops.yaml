@@ -1,0 +1,6 @@
+# SOPS encryption rules for the olympus cluster gitops tree.
+# Any file matching *.sops.yaml is encrypted to the dedicated cluster age key.
+# Flux decrypts at reconcile time using the 'sops-age' secret in flux-system.
+creation_rules:
+  - path_regex: .*\.sops\.ya?ml$
+    age: age1zwu2zrh0r6scfnr9wn8u7l63apmrqul2ttwup9ayqhpmhcg4kddsrmnrpy
