@@ -1,0 +1,10 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+# Explicit resource list so Flux never applies the plaintext .example secret
+# or the .sops.yaml config file. The .sops.yaml secret is decrypted by Flux.
+resources:
+  - namespace.yaml
+  - cluster-issuer.yaml
+  - gateway.yaml
+  - certificate.yaml
+  - porkbun-credentials.sops.yaml
