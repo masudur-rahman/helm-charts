@@ -9,16 +9,16 @@ spec:
     privateKeySecretRef:
       name: letsencrypt-porkbun-account
     solvers:
-      # DNS-01 via the Porkbun cert-manager webhook (installed by Ansible).
+      # DNS-01 via the Talinx Porkbun cert-manager webhook (installed by Ansible).
       # groupName/solverName must match the deployed webhook chart.
       - dns01:
           webhook:
-            groupName: acme.porkbun.com
+            groupName: porkbun.talinx.dev
             solverName: porkbun
             config:
-              apiKeySecretRef:
+              apiKey:
                 name: porkbun-credentials
                 key: api-key
-              secretApiKeySecretRef:
+              secretApiKey:
                 name: porkbun-credentials
                 key: secret-key
