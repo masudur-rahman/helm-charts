@@ -1,0 +1,50 @@
+# Option B: deploy the published pawsitively-purrfect chart from the
+# masud-charts HelmRepository. Non-secret overrides are inline; the arangodb /
+# postgres passwords come from the SOPS-encrypted values secret (decrypted by
+# Flux). Inline `values` take precedence over `valuesFrom`.
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: pawsitively-purrfect
+  namespace: flux-system
+spec:
+  interval: 10m
+  releaseName: pawsitively-purrfect
+  targetNamespace: pawsitively-purrfect
+  storageNamespace: pawsitively-purrfect
+  chart:
+    spec:
+      chart: pawsitively-purrfect
+      version: "0.2.0"
+      sourceRef:
+        kind: HelmRepository
+        name: masud-charts
+        namespace: flux-system
+      interval: 1h
+  install:
+    createNamespace: true
+    remediation:
+      retries: 3
+  upgrade:
+    remediation:
+      retries: 3
+  values:
+    domain: pawsitively.mrahman.xyz
+    image:
+      # Empty tag tracks the chart appVersion (v0.1.0).
+      tag: ""
+    pvc:
+      storageClassName: proxmox-zfs
+    # HTTPRoute templated by the chart; TLS terminates at the olympus Gateway.
+    httproute:
+      enabled: true
+      parentRef:
+        name: olympus
+        namespace: gateway
+      hostnames:
+        - pawsitively.mrahman.xyz
+      port: 80
+  valuesFrom:
+    - kind: Secret
+      name: pawsitively-purrfect-values
+      valuesKey: values.yaml

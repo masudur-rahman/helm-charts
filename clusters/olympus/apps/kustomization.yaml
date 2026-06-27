@@ -3,3 +3,6 @@ kind: Kustomization
 resources:
   - grafana-httproute.yaml
   - hubble-ui-httproute.yaml
+  - masud-charts-helmrepository.yaml
+  - pawsitively-purrfect-values.sops.yaml
+  - pawsitively-purrfect.yaml

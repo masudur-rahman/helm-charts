@@ -76,6 +76,16 @@ ingress:
   #    hosts:
   #      - pawsitively.purrfect
 
+# Gateway API HTTPRoute (alternative to ingress; TLS terminates at the Gateway).
+httproute:
+  enabled: false
+  parentRef:
+    name: ""
+    namespace: ""
+  hostnames: []
+  # Service port exposed by this chart's Service.
+  port: 80
+
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious
   # choice for the user. This also increases chances charts run on environments with little

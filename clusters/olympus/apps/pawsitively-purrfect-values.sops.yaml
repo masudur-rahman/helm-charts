@@ -1,0 +1,24 @@
+apiVersion: v1
+kind: Secret
+metadata:
+    name: pawsitively-purrfect-values
+    namespace: flux-system
+type: Opaque
+stringData:
+    #ENC[AES256_GCM,data:3MEGMrPC318Lc25aOuAUrcdF8n2F+ikC5UY2v6sc0ZQ3BrNsszECv6tXSL9zZwHkpfCe+9NfA/yul4DgZCTYmF4albBQOLHUIzBzij7N,iv:hsf5TG7MuLrR1KphvCszC85rDgstUr/1AjeyO478Ifk=,tag:BOgyqMvmnH0jShd7/hCOhg==,type:comment]
+    values.yaml: ENC[AES256_GCM,data:aciCt5bhvSSE9r1CYFLQIPLa4+5OKhtrRNQTmG65mkNAm2kHp0vs4kZ6QCTBio1mOhYJZ7FBXgykqQmujNXK1bIw0716phXzyqYHDkcXTNwrryRiiGnKgf0Rvf8TRQ==,iv:2iZCL2Mepg8nViZ37R6Mpd66CwmdfNBa/xg7kmskBn0=,tag:sq+d9oYE54ZKHzahabr7EA==,type:str]
+sops:
+    age:
+        - enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSByRTZaTFB1Z05KSkVXN1hJ
+            OTAyTWw3NFdSaksxOTZIRzdsU0U5Nkk5WUVjCkwzbFZRN2UzWnVPK0lEVURxTEE0
+            QXQ4a3RVZkxBb2gzTVk3VEVYMjRxSVEKLS0tIFRydkNPRHNvankvY1BlbE5rMWVH
+            SlM4OGFFcVJJYzVIY2ZRWTRNMXl4M2sKxZX1aIWX0PGAg4CCrmGz1rKAFy0CkEPA
+            Z97eJb/kvyFhVz0dLL9LISiJvsSKtdxGnuvYKsr511GyKJ8i7vh3QA==
+            -----END AGE ENCRYPTED FILE-----
+          recipient: age1zwu2zrh0r6scfnr9wn8u7l63apmrqul2ttwup9ayqhpmhcg4kddsrmnrpy
+    encrypted_regex: ^(data|stringData)$
+    lastmodified: "2026-06-27T04:58:15Z"
+    mac: ENC[AES256_GCM,data:xiXG66SDbw8LR1S4DpqHtmLwjv76efFTz/5NIlNl0tobB9lMZ0jKfp08Usf1rarM8/eNTVMG+6O5nZTw+wYmuhNMj8cLkd7I7fqzbbweQbshq4KTF1snZWS1xSwHDvntVTgtplTt1C/XB2Jzu3vPN2wxitO4g8vAfhD/UQa2DkU=,iv:JUobyY2A43jOFvBjhibNPFGJCzl1urgm490uAWmSIWA=,tag:DrulWEybpoqdBP7EbaAbQQ==,type:str]
+    version: 3.13.1

@@ -1,0 +1,10 @@
+# Published Helm repo (GitHub Pages, stable/ index) for masudur-rahman's charts.
+# Shared source for any HelmRelease pulling from masud's chart repo.
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: HelmRepository
+metadata:
+  name: masud-charts
+  namespace: flux-system
+spec:
+  interval: 1h
+  url: https://masudur-rahman.github.io/helm-charts/stable
