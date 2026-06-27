@@ -2,7 +2,7 @@
 
 ## Helm Repo
 ```bash
-$ helm repo add masud https://masudur-rahman.github.io/helm-charts/stable
+$ helm repo add masud https://charts.mrahman.xyz/stable
 $ helm repo update
 
 $ helm search repo masud/pawsitively-purrfect
