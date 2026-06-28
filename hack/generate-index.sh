@@ -12,5 +12,5 @@ done
 
 echo ""
 echo "Generating index.yaml for the charts..."
-helm repo index --url https://masudur-rahman.github.io/helm-charts/stable stable
+helm repo index --url https://charts.mrahman.xyz/stable stable
 

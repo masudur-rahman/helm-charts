@@ -3,74 +3,91 @@ entries:
   expense-tracker-bot:
   - apiVersion: v2
     appVersion: v1.0.0
-    created: "2026-06-27T18:30:24.169799+06:00"
+    created: "2026-06-28T16:54:33.858731+06:00"
     description: A Telegram Bot to track your expenses.
-    digest: 65d30378209cd893a5048fcb7652bac2674d1fadbe1b741b2e2c757a53c94942
+    digest: 5c477de1ecdd7330a49469d0b1925747f0f06a757ab211257559d38429a02fae
     name: expense-tracker-bot
     type: application
     urls:
-    - https://masudur-rahman.github.io/helm-charts/stable/expense-tracker-bot/expense-tracker-bot-1.0.0.tgz
+    - https://charts.mrahman.xyz/stable/expense-tracker-bot/expense-tracker-bot-1.0.0.tgz
     version: 1.0.0
   - apiVersion: v2
     appVersion: v0.2.4
-    created: "2026-06-27T18:30:24.169364+06:00"
+    created: "2026-06-28T16:54:33.857001+06:00"
     description: A Telegram Bot to track your expenses.
     digest: 87c544d39e626b45ff5381a6571135ed9fd189094c815efd2e6cb157aee89b42
     name: expense-tracker-bot
     type: application
     urls:
-    - https://masudur-rahman.github.io/helm-charts/stable/expense-tracker-bot/expense-tracker-bot-0.2.0.tgz
+    - https://charts.mrahman.xyz/stable/expense-tracker-bot/expense-tracker-bot-0.2.0.tgz
     version: 0.2.0
   - apiVersion: v2
     appVersion: v0.1.0
-    created: "2026-06-27T18:30:24.168748+06:00"
+    created: "2026-06-28T16:54:33.856374+06:00"
     description: A Helm chart for Kubernetes
     digest: 2504b17c9e67d34eeeb3ad6df56287763068299f3070fe5b6244a346640d41c0
     name: expense-tracker-bot
     type: application
     urls:
-    - https://masudur-rahman.github.io/helm-charts/stable/expense-tracker-bot/expense-tracker-bot-0.1.0.tgz
+    - https://charts.mrahman.xyz/stable/expense-tracker-bot/expense-tracker-bot-0.1.0.tgz
     version: 0.1.0
+  kazi-ancestry:
+  - apiVersion: v2
+    appVersion: v0.2.2
+    created: "2026-06-28T16:54:33.859452+06:00"
+    description: Kazi Ancestry — Bengali family tree (Go + Postgres, Gateway API)
+    digest: 5eea3d2c2b9c951f1f75de1cc1ae6d1ec5959b51b00e5cf73ba7b73e8ca89240
+    home: https://family.mrahman.xyz
+    maintainers:
+    - email: masudjuly02@gmail.com
+      name: Masudur Rahman
+    name: kazi-ancestry
+    sources:
+    - https://github.com/masudur-rahman/kazi-ancestry
+    type: application
+    urls:
+    - https://charts.mrahman.xyz/stable/kazi-ancestry/kazi-ancestry-0.2.2.tgz
+    version: 0.2.2
   pawsitively-purrfect:
   - apiVersion: v2
     appVersion: v0.1.0
-    created: "2026-06-27T18:30:24.171377+06:00"
+    created: "2026-06-28T16:54:33.861293+06:00"
     description: Pawsitively Purrfect
-    digest: 72ef7feca7524808a16f74317689afe88c12a06319e1ff1b8e73b1314691884a
+    digest: 19212dacabfa62cb8579e1fea48d660f0c1d73f5e3c82965a59f4fe248a66f68
     name: pawsitively-purrfect
     type: application
     urls:
-    - https://masudur-rahman.github.io/helm-charts/stable/pawsitively-purrfect/pawsitively-purrfect-0.2.0.tgz
+    - https://charts.mrahman.xyz/stable/pawsitively-purrfect/pawsitively-purrfect-0.2.0.tgz
     version: 0.2.0
   - apiVersion: v2
     appVersion: v0.1.0
-    created: "2026-06-27T18:30:24.170932+06:00"
+    created: "2026-06-28T16:54:33.860816+06:00"
     description: Pawsitively Purrfect
     digest: 05363996b314e9acd7737d4ac4425fdd13c0b45a714b9a447fd1f5af1609bd64
     name: pawsitively-purrfect
     type: application
     urls:
-    - https://masudur-rahman.github.io/helm-charts/stable/pawsitively-purrfect/pawsitively-purrfect-0.1.0.tgz
+    - https://charts.mrahman.xyz/stable/pawsitively-purrfect/pawsitively-purrfect-0.1.0.tgz
     version: 0.1.0
   - apiVersion: v2
     appVersion: v0.0.3
-    created: "2026-06-27T18:30:24.170327+06:00"
+    created: "2026-06-28T16:54:33.860056+06:00"
     description: A Helm chart for Kubernetes
     digest: 528a028a6e15f75c719a013ec835f471e48c3da1610a6a5b20cf18858da2a6ba
     name: pawsitively-purrfect
     type: application
     urls:
-    - https://masudur-rahman.github.io/helm-charts/stable/pawsitively-purrfect/pawsitively-purrfect-0.0.3.tgz
+    - https://charts.mrahman.xyz/stable/pawsitively-purrfect/pawsitively-purrfect-0.0.3.tgz
     version: 0.0.3
   sample-chart:
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2026-06-27T18:30:24.171699+06:00"
+    created: "2026-06-28T16:54:33.861637+06:00"
     description: A Helm chart for Kubernetes
-    digest: 788de8e1361fc70bdf2240f353ad029656ae4e240a97e00a990e47eed192da66
+    digest: f2aa533dbb24f2e79856adbca06111e55af084b37679bfc2d358a02f40f56ff4
     name: sample-chart
     type: application
     urls:
-    - https://masudur-rahman.github.io/helm-charts/stable/sample-chart/sample-chart-0.1.0.tgz
+    - https://charts.mrahman.xyz/stable/sample-chart/sample-chart-0.1.0.tgz
     version: 0.1.0
-generated: "2026-06-27T18:30:24.167994+06:00"
+generated: "2026-06-28T16:54:33.855382+06:00"
