@@ -1,0 +1,98 @@
+# Kazi Ancestry — Bengali family tree (Go + Postgres). Deployed from the
+# masud-charts HelmRepository. Every non-secret setting the server reads is
+# spelled out under `values` below; the three credentials (DB password, Google
+# client secret, session secret) come from the SOPS-encrypted values secret
+# (decrypted by Flux). Inline `values` take precedence over `valuesFrom`.
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: kazi-ancestry
+  namespace: flux-system
+spec:
+  interval: 10m
+  releaseName: kazi-ancestry
+  # Namespace + the SOPS-encrypted credentials Secret are created by kustomize
+  # (kazi-ancestry-namespace.yaml / kazi-ancestry-credentials.sops.yaml).
+  targetNamespace: kazi-ancestry
+  storageNamespace: kazi-ancestry
+  chart:
+    spec:
+      chart: kazi-ancestry
+      version: "0.2.2"
+      sourceRef:
+        kind: HelmRepository
+        name: masud-charts
+        namespace: flux-system
+      interval: 1h
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    remediation:
+      retries: 3
+  values:
+    replicaCount: 1
+
+    # Credentials come from the pre-created SOPS Secret (PGPASSWORD,
+    # GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, SESSION_SECRET, ADMIN_EMAILS) —
+    # injected as env (envFrom) and overriding the config file. The chart skips
+    # rendering its own Secret.
+    existingSecret: kazi-ancestry-credentials
+
+    image:
+      repository: masudjuly02/kazi-ancestry
+      tag: ""            # empty tracks the chart appVersion (v0.2.2)
+      pullPolicy: IfNotPresent
+
+    # ── Application config (non-secret → mounted as the app's YAML config) ──
+    config:
+      env: production           # prod zap logging
+      guestNamesOnly: false     # true -> logged-out guests see only names
+      # admins come from the SOPS secret (ADMIN_EMAILS); allowlist via ALLOWLIST.
+      allowlist: []             # may suggest edits; others are read-only viewers
+      seedPath: ""              # empty -> in-image sample (or the seed mount below)
+
+    # ── Database — external Postgres (NOT provisioned here) ────────────────
+    # password comes from the SOPS values secret (→ PGPASSWORD).
+    database:
+      host: data.mrahman.xyz
+      port: "5432"
+      name: kazi
+      user: postgres
+      sslmode: require
+
+    # ── Server ─────────────────────────────────────────────────────────────
+    service:
+      type: ClusterIP
+      port: 80                  # Service port (HTTPRoute backend)
+      targetPort: 5294          # container port the app listens on
+    metrics:
+      port: 9090                # internal /metrics port (not routed by the Gateway)
+
+    # ── Google OAuth ───────────────────────────────────────────────────────
+    # clientId + clientSecret + sessionSecret come from the SOPS secret
+    # (GOOGLE_CLIENT_ID / GOOGLE_CLIENT_SECRET / SESSION_SECRET).
+    oauth:
+      redirectUrl: https://family.mrahman.xyz/auth/callback
+
+    # ── Routing — HTTPRoute on the shared olympus Gateway (TLS terminates there) ─
+    gateway:
+      enabled: true
+      hostname: family.mrahman.xyz   # public domain
+      parentRefs:
+        - name: olympus
+          namespace: gateway
+    ingress:
+      enabled: false                 # using Gateway API instead
+
+    # ── Seed ───────────────────────────────────────────────────────────────
+    # Seeds the real tree on first boot (idempotent) from the SOPS-encrypted
+    # kazi-ancestry-seed Secret (key family.local.json). Real data stays
+    # encrypted, out of the image and out of plain git.
+    seed:
+      enabled: true
+      existingSecret: kazi-ancestry-seed
+
+    # ── Observability (Prometheus Operator) ────────────────────────────────
+    serviceMonitor:
+      enabled: false                 # flip on once the operator selects this ns

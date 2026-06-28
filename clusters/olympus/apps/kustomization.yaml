@@ -3,6 +3,10 @@ kind: Kustomization
 resources:
   - grafana-httproute.yaml
   - hubble-ui-httproute.yaml
+  - kazi-ancestry-namespace.yaml
+  - kazi-ancestry-credentials.sops.yaml
+  - kazi-ancestry-seed.sops.yaml
+  - kazi-ancestry.yaml
   - masud-charts-helmrepository.yaml
   - pawsitively-purrfect-values.sops.yaml
   - pawsitively-purrfect.yaml
