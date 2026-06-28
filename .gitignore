@@ -8,6 +8,10 @@ porkbun-credentials.yml
 secret.yaml
 secret.yml
 
+# …but Helm chart Secret *templates* are source, not decrypted secrets — keep them.
+!charts/**/templates/secret.yaml
+!charts/**/templates/secret.yml
+
 # age private keys
 *.agekey
 age.key
