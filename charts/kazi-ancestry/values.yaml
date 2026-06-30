@@ -57,6 +57,7 @@ config:
   admins:                  # emails that can edit + review
     - masudjuly02@gmail.com
   allowlist: []            # emails that can suggest (others are read-only viewers)
+  openSuggestions: true    # any logged-in user may suggest (not just the allowlist)
   seedPath: ""             # SEED_PATH; empty -> in-image sample (see `seed` below)
 
 # ── Database (NOT provisioned by this chart — point at your Postgres) ──────────

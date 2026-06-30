@@ -2,8 +2,8 @@ apiVersion: v2
 name: kazi-ancestry
 description: Kazi Ancestry — Bengali family tree (Go + Postgres, Gateway API)
 type: application
-version: 0.2.2
-appVersion: "v0.2.2"
+version: 0.3.0
+appVersion: "v0.3.0"
 home: https://family.mrahman.xyz
 sources:
   - https://github.com/masudur-rahman/kazi-ancestry

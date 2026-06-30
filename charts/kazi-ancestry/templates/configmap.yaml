@@ -32,6 +32,7 @@ data:
         {{- toYaml .Values.config.admins | nindent 8 }}
       allowlist:
         {{- toYaml .Values.config.allowlist | nindent 8 }}
+      openSuggestions: {{ .Values.config.openSuggestions }}
     privacy:
       guestNamesOnly: {{ .Values.config.guestNamesOnly }}
     {{- if $seedPath }}

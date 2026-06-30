@@ -18,7 +18,7 @@ spec:
   chart:
     spec:
       chart: kazi-ancestry
-      version: "0.2.2"
+      version: "0.3.0"
       sourceRef:
         kind: HelmRepository
         name: masud-charts
@@ -41,7 +41,7 @@ spec:
 
     image:
       repository: masudjuly02/kazi-ancestry
-      tag: ""            # empty tracks the chart appVersion (v0.2.2)
+      tag: ""            # empty tracks the chart appVersion (v0.3.0)
       pullPolicy: IfNotPresent
 
     # ── Application config (non-secret → mounted as the app's YAML config) ──
@@ -50,6 +50,7 @@ spec:
       guestNamesOnly: false     # true -> logged-out guests see only names
       # admins come from the SOPS secret (ADMIN_EMAILS); allowlist via ALLOWLIST.
       allowlist: []             # may suggest edits; others are read-only viewers
+      openSuggestions: true     # any logged-in user may suggest (not just the allowlist)
       seedPath: ""              # empty -> in-image sample (or the seed mount below)
 
     # ── Database — external Postgres (NOT provisioned here) ────────────────
