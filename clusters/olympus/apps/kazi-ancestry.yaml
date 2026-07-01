@@ -60,7 +60,7 @@ spec:
       port: "5432"
       name: kazi
       user: postgres
-      sslmode: require
+      sslmode: disable
 
     # ── Server ─────────────────────────────────────────────────────────────
     service:
