@@ -9,12 +9,18 @@ metadata:
   name: kazi-ancestry
   namespace: flux-system
 spec:
-  interval: 10m
+  interval: 1m
   releaseName: kazi-ancestry
   # Namespace + the SOPS-encrypted credentials Secret are created by kustomize
   # (kazi-ancestry-namespace.yaml / kazi-ancestry-credentials.sops.yaml).
   targetNamespace: kazi-ancestry
   storageNamespace: kazi-ancestry
+  driftDetection:
+    mode: enabled
+    ignore:
+      - target:
+          kind: Deployment
+        paths: ["/spec/replicas"]
   chart:
     spec:
       chart: kazi-ancestry
@@ -32,6 +38,10 @@ spec:
       retries: 3
   values:
     replicaCount: 1
+    autoscaling:
+      enabled: true
+      minReplicas: 2
+      maxReplicas: 4
 
     # Credentials come from the pre-created SOPS Secret (PGPASSWORD,
     # GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, SESSION_SECRET, ADMIN_EMAILS) —
