@@ -24,7 +24,7 @@ spec:
   chart:
     spec:
       chart: kazi-ancestry
-      version: "0.3.0"
+      version: "0.3.1"
       sourceRef:
         kind: HelmRepository
         name: masud-charts
@@ -51,7 +51,7 @@ spec:
 
     image:
       repository: masudjuly02/kazi-ancestry
-      tag: ""            # empty tracks the chart appVersion (v0.3.0)
+      tag: ""            # empty tracks the chart appVersion (v0.3.1)
       pullPolicy: IfNotPresent
 
     # ── Application config (non-secret → mounted as the app's YAML config) ──

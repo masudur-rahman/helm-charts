@@ -3,7 +3,7 @@ entries:
   expense-tracker-bot:
   - apiVersion: v2
     appVersion: v1.0.0
-    created: "2026-07-01T01:41:36.86622+06:00"
+    created: "2026-07-02T12:10:09.998631+06:00"
     description: A Telegram Bot to track your expenses.
     digest: 5c477de1ecdd7330a49469d0b1925747f0f06a757ab211257559d38429a02fae
     name: expense-tracker-bot
@@ -13,7 +13,7 @@ entries:
     version: 1.0.0
   - apiVersion: v2
     appVersion: v0.2.4
-    created: "2026-07-01T01:41:36.865742+06:00"
+    created: "2026-07-02T12:10:09.998173+06:00"
     description: A Telegram Bot to track your expenses.
     digest: 87c544d39e626b45ff5381a6571135ed9fd189094c815efd2e6cb157aee89b42
     name: expense-tracker-bot
@@ -23,7 +23,7 @@ entries:
     version: 0.2.0
   - apiVersion: v2
     appVersion: v0.1.0
-    created: "2026-07-01T01:41:36.865099+06:00"
+    created: "2026-07-02T12:10:09.997635+06:00"
     description: A Helm chart for Kubernetes
     digest: 2504b17c9e67d34eeeb3ad6df56287763068299f3070fe5b6244a346640d41c0
     name: expense-tracker-bot
@@ -33,8 +33,24 @@ entries:
     version: 0.1.0
   kazi-ancestry:
   - apiVersion: v2
+    appVersion: v0.3.1
+    created: "2026-07-02T12:10:10.000412+06:00"
+    description: Kazi Ancestry — Bengali family tree (Go + Postgres, Gateway API)
+    digest: 8d289b6880dce47c4abc6606128b470c0afead0d79d248ba5cc8fe5c5ee47bc2
+    home: https://family.mrahman.xyz
+    maintainers:
+    - email: masudjuly02@gmail.com
+      name: Masudur Rahman
+    name: kazi-ancestry
+    sources:
+    - https://github.com/masudur-rahman/kazi-ancestry
+    type: application
+    urls:
+    - https://charts.mrahman.xyz/stable/kazi-ancestry/kazi-ancestry-0.3.1.tgz
+    version: 0.3.1
+  - apiVersion: v2
     appVersion: v0.3.0
-    created: "2026-07-01T01:41:36.867994+06:00"
+    created: "2026-07-02T12:10:10.000004+06:00"
     description: Kazi Ancestry — Bengali family tree (Go + Postgres, Gateway API)
     digest: 7070f48102e34c36866f254c52506226d4f727de08210a406be71218134c475c
     home: https://family.mrahman.xyz
@@ -50,7 +66,7 @@ entries:
     version: 0.3.0
   - apiVersion: v2
     appVersion: v0.2.2
-    created: "2026-07-01T01:41:36.867152+06:00"
+    created: "2026-07-02T12:10:09.999443+06:00"
     description: Kazi Ancestry — Bengali family tree (Go + Postgres, Gateway API)
     digest: 5eea3d2c2b9c951f1f75de1cc1ae6d1ec5959b51b00e5cf73ba7b73e8ca89240
     home: https://family.mrahman.xyz
@@ -67,7 +83,7 @@ entries:
   pawsitively-purrfect:
   - apiVersion: v2
     appVersion: v0.1.0
-    created: "2026-07-01T01:41:36.869691+06:00"
+    created: "2026-07-02T12:10:10.002372+06:00"
     description: Pawsitively Purrfect
     digest: 19212dacabfa62cb8579e1fea48d660f0c1d73f5e3c82965a59f4fe248a66f68
     name: pawsitively-purrfect
@@ -77,7 +93,7 @@ entries:
     version: 0.2.0
   - apiVersion: v2
     appVersion: v0.1.0
-    created: "2026-07-01T01:41:36.869231+06:00"
+    created: "2026-07-02T12:10:10.001896+06:00"
     description: Pawsitively Purrfect
     digest: 05363996b314e9acd7737d4ac4425fdd13c0b45a714b9a447fd1f5af1609bd64
     name: pawsitively-purrfect
@@ -87,7 +103,7 @@ entries:
     version: 0.1.0
   - apiVersion: v2
     appVersion: v0.0.3
-    created: "2026-07-01T01:41:36.868617+06:00"
+    created: "2026-07-02T12:10:10.000821+06:00"
     description: A Helm chart for Kubernetes
     digest: 528a028a6e15f75c719a013ec835f471e48c3da1610a6a5b20cf18858da2a6ba
     name: pawsitively-purrfect
@@ -98,7 +114,7 @@ entries:
   sample-chart:
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2026-07-01T01:41:36.870021+06:00"
+    created: "2026-07-02T12:10:10.00276+06:00"
     description: A Helm chart for Kubernetes
     digest: f2aa533dbb24f2e79856adbca06111e55af084b37679bfc2d358a02f40f56ff4
     name: sample-chart
@@ -106,4 +122,4 @@ entries:
     urls:
     - https://charts.mrahman.xyz/stable/sample-chart/sample-chart-0.1.0.tgz
     version: 0.1.0
-generated: "2026-07-01T01:41:36.863827+06:00"
+generated: "2026-07-02T12:10:09.997013+06:00"
