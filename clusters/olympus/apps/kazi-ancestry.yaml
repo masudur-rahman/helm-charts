@@ -51,7 +51,7 @@ spec:
 
     image:
       repository: masudjuly02/kazi-ancestry
-      tag: ""                  # empty tracks the chart appVersion (v1.0.0)
+      tag: "v1.0.1"                  # empty tracks the chart appVersion (v1.0.0)
       pullPolicy: IfNotPresent
 
     # ── Application config (non-secret → mounted as the app's YAML config) ──
