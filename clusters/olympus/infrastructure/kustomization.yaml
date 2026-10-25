@@ -7,4 +7,4 @@ resources:
   - cluster-issuer.yaml
   - gateway.yaml
   - certificate.yaml
-  - porkbun-credentials.sops.yaml
+  - cloudflare-api-token.sops.yaml
