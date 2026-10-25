@@ -6,7 +6,7 @@ metadata:
 spec:
   secretName: wildcard-mrahman-xyz-tls
   issuerRef:
-    name: letsencrypt-porkbun
+    name: letsencrypt-cloudflare
     kind: ClusterIssuer
   commonName: "*.mrahman.xyz"
   dnsNames:

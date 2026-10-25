@@ -1,0 +1,11 @@
+# Template — copy to cloudflare-api-token.sops.yaml, fill the token, then sops-encrypt.
+# Same token as homelab-forge vault/compute.yml (vault_cloudflare_dns_api_token).
+# ClusterIssuer secrets are read from cert-manager's own namespace.
+apiVersion: v1
+kind: Secret
+metadata:
+  name: cloudflare-api-token
+  namespace: cert-manager
+type: Opaque
+stringData:
+  api-token: "REPLACE_WITH_CLOUDFLARE_API_TOKEN"

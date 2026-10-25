@@ -22,7 +22,7 @@ update-index:
 # ---------------------------------------------------------------------------
 
 # Default secret file so the common case needs no FILE=.
-FILE     ?= clusters/olympus/infrastructure/porkbun-credentials.sops.yaml
+FILE     ?= clusters/olympus/infrastructure/cloudflare-api-token.sops.yaml
 # age private keyring sops decrypts with (absolute; default is the sops standard path).
 AGE_KEY  ?= $(HOME)/.config/sops/age/keys.txt
 # homelab-forge checkout that holds the olympus age key in its vault.

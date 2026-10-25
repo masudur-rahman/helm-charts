@@ -1,8 +1,8 @@
 .idea
 
 # Plaintext / decrypted secrets — NEVER commit. Only *.sops.yaml (encrypted) is tracked.
-porkbun-credentials.yaml
-porkbun-credentials.yml
+cloudflare-api-token.yaml
+cloudflare-api-token.yml
 *.dec.yaml
 *.dec.yml
 secret.yaml
