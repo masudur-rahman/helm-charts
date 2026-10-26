@@ -33,6 +33,7 @@ asclepius:
   #   tag: v0.1.0
 
 medipedia:
+  database: medicine_catalog
   existingSecret: health-archive-medipedia
   # token_sha256 printed by `medipedia token asclepius` for the token in
   # vault_health_archive_medipedia_token. Not secret.
