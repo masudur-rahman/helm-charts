@@ -1,0 +1,57 @@
+# medjournal (frontend) and medjournal-api (asclepius) on the olympus Gateway;
+# TLS terminates there with the *.mrahman.xyz cert. Public via the Cloudflare
+# tunnel on portal → https://10.66.0.150 (origin server name = the hostname).
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: medjournal
+  namespace: health-archive
+spec:
+  parentRefs:
+    - name: olympus
+      namespace: gateway
+  hostnames:
+    - medjournal.mrahman.xyz
+  rules:
+    - backendRefs:
+        - name: health-archive-frontend
+          port: 80
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: medjournal-api
+  namespace: health-archive
+spec:
+  parentRefs:
+    - name: olympus
+      namespace: gateway
+  hostnames:
+    - medjournal-api.mrahman.xyz
+  rules:
+    # The unsigned extraction callback stays in-cluster: longest prefix wins,
+    # and the blocked Service has no endpoints, so the public gets a 503.
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /api/v1/internal
+      backendRefs:
+        - name: health-archive-blocked
+          port: 80
+    - backendRefs:
+        - name: health-archive-asclepius
+          port: 8080
+---
+# No pods match. Mirrors the chart's own blocked Service, which it only
+# renders with its Ingress enabled.
+apiVersion: v1
+kind: Service
+metadata:
+  name: health-archive-blocked
+  namespace: health-archive
+spec:
+  selector:
+    app.kubernetes.io/name: blocked
+    app.kubernetes.io/instance: health-archive-none
+  ports:
+    - port: 80

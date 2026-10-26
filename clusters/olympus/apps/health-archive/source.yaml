@@ -1,0 +1,20 @@
+# Private chart source. Auth: GitHub App (org policy disables deploy keys),
+# Contents read-only, installed on dev-stack only. Secret
+# health-archive-devstack-auth is created by homelab-forge.
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: GitRepository
+metadata:
+  name: health-archive-devstack
+  namespace: flux-system
+spec:
+  interval: 10m
+  url: https://github.com/health-archive/dev-stack
+  provider: github
+  ref:
+    branch: main
+  secretRef:
+    name: health-archive-devstack-auth
+  # Fetch only the chart.
+  ignore: |
+    /*
+    !/charts/health-archive/

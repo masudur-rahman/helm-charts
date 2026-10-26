@@ -1,0 +1,66 @@
+# Values for dev-stack charts/health-archive (see its INTEGRATION.md). No
+# secrets here: the Secrets named below come from homelab-forge's vault.
+#
+# Images default to the chart's pinned tags. Override any service with:
+#   <service>:
+#     image:
+#       repository: asclepius
+#       tag: v0.1.1
+# (registry: imageRegistry, default ghcr.io/health-archive)
+
+imagePullSecrets:
+  - name: ghcr
+
+postgres:
+  host: data.mrahman.xyz
+  sslMode: disable
+  existingSecret: health-archive-postgres
+
+minio:
+  endpoint: data.mrahman.xyz:9000
+  useSSL: false
+  existingSecret: health-archive-minio
+
+asclepius:
+  existingSecret: health-archive-asclepius
+  # TODO: set to https://medjournal.mrahman.xyz before real patient data.
+  # Empty allows any origin, so the frontend dev can test from localhost.
+  corsOrigin: ""
+  # Exposed by httproutes.yaml (Gateway API), not the chart's Ingress.
+  ingress:
+    enabled: false
+  # image:
+  #   tag: v0.1.0
+
+medipedia:
+  existingSecret: health-archive-medipedia
+  # token_sha256 printed by `medipedia token asclepius` for the token in
+  # vault_health_archive_medipedia_token. Not secret.
+  clients:
+    - name: asclepius
+      token_sha256: a0f3940600f03fd51bb84c53954c61c935e38fdace6cbd03d3e5f5b0f339ccb2
+  # image:
+  #   tag: v0.4.2
+
+# iris:
+#   image:
+#     tag: v1.2.0
+
+imageParser:
+  model:
+    # GCP project that pays for Vertex.
+    project: core-platform-hq
+  vertex:
+    existingSecret: image-parser-vertex
+  # image:
+  #   tag: v0.1.1
+
+frontend:
+  apiBaseUrl: https://medjournal-api.mrahman.xyz/api/v1
+  ingress:
+    enabled: false
+  # image:
+  #   tag: v0.1.0
+
+playground:
+  enabled: false
