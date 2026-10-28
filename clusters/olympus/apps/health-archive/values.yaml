@@ -26,9 +26,7 @@ asclepius:
   # TODO: set to https://medjournal.mrahman.xyz before real patient data.
   # Empty allows any origin, so the frontend dev can test from localhost.
   corsOrigin: ""
-  # Exposed by httproutes.yaml (Gateway API), not the chart's Ingress.
-  ingress:
-    enabled: false
+  hostname: medjournal-api.mrahman.xyz
   # image:
   #   tag: v0.1.0
 
@@ -58,10 +56,21 @@ imageParser:
 
 frontend:
   apiBaseUrl: https://medjournal-api.mrahman.xyz/api/v1
-  ingress:
-    enabled: false
+  hostname: medjournal.mrahman.xyz
   # image:
   #   tag: v0.1.0
 
+# No auth and every run bills Vertex: LAN only. AdGuard (homelab-forge) points
+# the name at the Gateway VIP; never add it to the Cloudflare tunnel.
 playground:
-  enabled: false
+  enabled: true
+  hostname: medjournal-playground.mrahman.xyz
+
+# HTTPRoutes on the shared olympus Gateway (TLS with the *.mrahman.xyz cert).
+# The chart leaves /api/v1/internal unrouted (404), so the extraction callback
+# stays in-cluster. Public via the Cloudflare tunnel on portal → 10.66.0.150.
+gateway:
+  enabled: true
+  parentRefs:
+    - name: olympus
+      namespace: gateway

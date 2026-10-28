@@ -7,7 +7,6 @@ resources:
   - namespace.yaml
   - source.yaml
   - release.yaml
-  - httproutes.yaml
 configMapGenerator:
   # values.yaml → ConfigMap the HelmRelease reads. Stable name + watch label so
   # an edit to values.yaml upgrades the release on the next reconcile.
